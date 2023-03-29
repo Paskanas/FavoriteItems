@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FavoriteItemController;
 use App\Http\Controllers\ItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -18,4 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/', [ItemController::class, 'index']);
+Route::get('/items', [ItemController::class, 'index']);
+
+Route::get('/favorite-items/{id}', [FavoriteItemController::class, 'index']);
+Route::post('/add-favorite-item', [FavoriteItemController::class, 'store']);
+Route::delete('/favorite-items/{userId}/{itemId}', [FavoriteItemController::class, 'destroy']);
