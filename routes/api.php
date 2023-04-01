@@ -20,7 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/items', [ItemController::class, 'index']);
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('/items/{item}', [ItemController::class, 'edit']);
+    Route::put('/items/{item}', [ItemController::class, 'update']);
+    Route::put('/items/image/{item}', [ItemController::class, 'updateImage']);
 
-Route::get('/favorite-items/{id}', [FavoriteItemController::class, 'index']);
-Route::post('/add-favorite-item', [FavoriteItemController::class, 'store']);
-Route::delete('/favorite-items/{userId}/{itemId}', [FavoriteItemController::class, 'destroy']);
+    Route::get('/favorite-items/{id}', [FavoriteItemController::class, 'index']);
+    Route::delete('/favorite-items/{userId}/{itemId}', [FavoriteItemController::class, 'destroy']);
+    Route::post('/add-favorite-item', [FavoriteItemController::class, 'store']);
+});

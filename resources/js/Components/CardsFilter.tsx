@@ -15,7 +15,9 @@ const CardsFilter: React.FC<CardsFilter> = ({ setFilteredItems, items }) => {
         item.title.toLowerCase().includes(searchQuery.trim().toLowerCase()) ||
         item.year.toString().includes(searchQuery.trim()) ||
         item.genre.toLowerCase().includes(searchQuery.trim().toLowerCase()) ||
-        item.duration_in_minutes.toString().includes(searchQuery.trim())
+        item.duration_in_minutes.toString().includes(searchQuery.trim()) ||
+        item.type.toString().toLowerCase().includes(searchQuery.trim().toLowerCase())
+
       )
       )
     } else {
@@ -25,8 +27,11 @@ const CardsFilter: React.FC<CardsFilter> = ({ setFilteredItems, items }) => {
 
 
   return (
-    <div className='text-black mb-6'>
-      <input type="text" value={searchQuery} onChange={(event) => setSearchQuery(event.target.value)} placeholder="Search items" />
+    <div className='text-black mb-6 w-full'>
+      <input className='w-full rounded-3xl'
+        type="text" value={searchQuery}
+        onChange={(event) => setSearchQuery(event.target.value)}
+        placeholder="Search items" />
     </div>
   )
 }

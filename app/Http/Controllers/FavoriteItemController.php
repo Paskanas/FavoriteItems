@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\FavoriteItem;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FavoriteItemController extends Controller
 {
@@ -27,30 +26,14 @@ class FavoriteItemController extends Controller
      */
     public function store(Request $request)
     {
-        $itemId = $request->item;
-        $userId = $request->user;
+        $itemId = $request->itemId;
+        $userId = $request->userId;
 
         $favoriteItem = new FavoriteItem;
         $favoriteItem->item_id = $itemId;
         $favoriteItem->user_id = $userId;
         $favoriteItem->save();
         return response()->json(['message' => "Item added successfuly with id $itemId to user $userId"]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
     }
 
     /**

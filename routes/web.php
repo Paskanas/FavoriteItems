@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\FavoriteItemController;
-use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
+use App\Models\Item;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -19,30 +19,31 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect('/home');
+    }
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
     ]);
 });
 
 Route::get('/home', function () {
     return Inertia::render('Home');
-})->middleware(['auth', 'verified'])->name('home');
+})->middleware(['auth', 'verified'])->name('home'); //gets redirect
+
+Route::get('/home/{item}', function (Item $item) {
+    return Inertia::render('EditItem', ['item' => $item]);
+})->middleware('rp:admin')->name('edit'); //gets unauthorised
 
 Route::get('/favorites', function () {
     return Inertia::render('Favorites');
-})->middleware(['auth', 'verified'])->name('favorites');
-
-Route::post('/home', [FavoriteItemController::class, 'store'])->middleware(['auth', 'verified'])->name('add.favorite.item');
-
+})->middleware('rp:user')->name('favorites'); //gets unauthorised 
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    // Route::get('/items', [ItemController::class, 'index'])->name('items.index');
 });
 
 

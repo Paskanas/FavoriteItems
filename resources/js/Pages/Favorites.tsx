@@ -3,20 +3,28 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps, Item } from '@/types/index';
 import CardContainer from '@/Components/CardContainer';
+import { getFavoriteItems } from '@/services/api';
 
 const Items = ({ auth }: PageProps) => {
+
   const [allFavoriteItems, setAllFavoriteItems] = useState<Item[]>([]);
 
   useEffect(() => {
-    fetch(`/api/favorite-items/${auth.user.id}`)
-      .then(response => response.json())
-      .then(data => setAllFavoriteItems(data));
-  }, [setAllFavoriteItems])
+    const fetchFavoriteItems = async () => {
+      try {
+        const favoriteItems = await getFavoriteItems(auth.user.id);
+        setAllFavoriteItems(favoriteItems);
+      } catch (error) {
+        console.error('Error fetching favorite items', error);
+      }
+    };
+    fetchFavoriteItems();
+
+  }, [auth, setAllFavoriteItems])
 
   const updateItems = (updatedItems: Item[]) => {
     setAllFavoriteItems(updatedItems);
   };
-
 
   return (
     <AuthenticatedLayout

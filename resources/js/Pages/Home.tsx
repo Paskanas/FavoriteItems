@@ -3,8 +3,9 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps, Item } from '@/types/index';
 import CardContainer from '@/Components/CardContainer';
+import { getAllItems } from '@/services/api';
 
-const Items = ({ auth }: PageProps) => {
+const Home = ({ auth }: PageProps) => {
   const [allITems, setAllItems] = useState<Item[]>([]);
 
   const updateItems = (updatedItems: Item[]) => {
@@ -12,11 +13,16 @@ const Items = ({ auth }: PageProps) => {
   };
 
   useEffect(() => {
-    fetch('/api/items')
-      .then(response => response.json())
-      .then(data => setAllItems(data));
+    const fetchAllItems = async () => {
+      try {
+        const response = await getAllItems();
+        setAllItems(response);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchAllItems();
   }, [setAllItems])
-
 
   return (
     <AuthenticatedLayout
@@ -28,4 +34,4 @@ const Items = ({ auth }: PageProps) => {
   )
 }
 
-export default Items
+export default Home

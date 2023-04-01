@@ -9,6 +9,10 @@ import { User } from '@/types';
 export default function Authenticated({ user, header, children }: PropsWithChildren<{ user: User, header?: ReactNode }>) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
+    const handleLogout = () => {
+        localStorage.removeItem('access_token');
+    }
+
     return (
         <div className="min-h-screen bg-gray-100 dark:bg-gray-900">
             <nav className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-700">
@@ -60,7 +64,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
 
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                                        <Dropdown.Link href={route('logout')} method="post" as="button">
+                                        <Dropdown.Link href={route('logout')} method="post" as="button" onClick={handleLogout}>
                                             Log Out
                                         </Dropdown.Link>
                                     </Dropdown.Content>
@@ -99,6 +103,9 @@ export default function Authenticated({ user, header, children }: PropsWithChild
                         <ResponsiveNavLink href={route('home')} active={route().current('home')}>
                             Home
                         </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('favorites')} active={route().current('favorites')}>
+                            Favorites
+                        </ResponsiveNavLink>
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
@@ -111,7 +118,7 @@ export default function Authenticated({ user, header, children }: PropsWithChild
 
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button">
+                            <ResponsiveNavLink method="post" href={route('logout')} as="button" onClick={handleLogout}>
                                 Log Out
                             </ResponsiveNavLink>
                         </div>
