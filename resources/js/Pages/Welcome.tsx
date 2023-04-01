@@ -36,7 +36,7 @@ export default function Welcome({ auth }: PageProps<{ laravelVersion: string, ph
                         <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </Link>
                     <div className='flex py-4 ml-5 '>
-                        <h1 className='text-white text-3xl'>All items</h1>
+                        <h1 className='text-black dark:text-white text-3xl'>All items</h1>
                     </div>
                     <div className="p-6 text-right">
                         {auth.user ? (
