@@ -2,6 +2,16 @@
 
 This project lets user add items (movies, TV shows) to favorites. Admin can modify data. Everything with responsive design.
 
+## Description
+
+This website is a platform for users to browse through a collection of items and add their favorite items to a list. Additionally, an admin user can modify the data related to the items displayed on the website.
+
+The website utilizes a database to store the information related to each item, such as its title and description, and also stores the list of favorite items selected by each user. This allows users to access their favorite items list even if they leave the website and return at a later time.
+
+The admin user has the ability to modify the item information, such as updating the title or description, as well as deleting or adding new items to the collection.
+
+Overall, the website offers a simple and user-friendly interface for browsing items and managing favorite items, while also providing an efficient way for the admin user to manage the data.
+
 ## Getting Started
 
 Follow the steps below to get the project up and running on your local machine:
