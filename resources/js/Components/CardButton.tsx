@@ -12,6 +12,7 @@ const CardButton: React.FC<CardButtonProps> = ({
     backgroundColor: buttonColor,
     opacity: '100%'
   });
+  const [buttonEnabled, setButtonEnabled] = useState(true);
   const getButtonColor = (buttonId: number) => {
     if (buttonId == 1) {
       setButtonColor('red');
@@ -72,10 +73,11 @@ const CardButton: React.FC<CardButtonProps> = ({
   return (
     <button
       style={buttonStyle}
+      disabled={!buttonEnabled}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className={'text-white font-bold mt-2 py-2 px-4 rounded '}
-      onClick={() => handleButtonClick({ id: item.id, title: item.title })}
+      onClick={() => handleButtonClick({ id: item.id, title: item.title, setButtonEnabled: setButtonEnabled })}
     >
       {getButtonText(buttonId)}
     </button >

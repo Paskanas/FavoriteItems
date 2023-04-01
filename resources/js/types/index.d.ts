@@ -27,6 +27,7 @@ export interface Item {
 export interface FunctionData {
   id: number;
   title?:string;
+  setButtonEnabled?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface CardContainerProps extends PageProps {

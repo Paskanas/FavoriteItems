@@ -33,9 +33,12 @@ const Card: React.FC<CardProps> = ({ item,
   const getNewImage = async (data: FunctionData) => {
     if (data.title) {
       try {
+        data.setButtonEnabled && data.setButtonEnabled(false);
         const posterUrl = await getItemImage(data.title);
         updateItemImage(data.id, posterUrl);
+        data.setButtonEnabled && data.setButtonEnabled(true);
       } catch (error) {
+        data.setButtonEnabled && data.setButtonEnabled(true);
         console.error('Error updating item poster', error);
       }
     }
@@ -49,9 +52,12 @@ const Card: React.FC<CardProps> = ({ item,
 
   const handleAddToFavoriteItems = async (data: FunctionData) => {
     try {
+      data.setButtonEnabled && data.setButtonEnabled(false);
       await addFavoriteItem(data.id, auth.user.id);
       setFavoriteItemsIds([...favoriteItemsIds, data.id]);
+      data.setButtonEnabled && data.setButtonEnabled(true);
     } catch (error) {
+      data.setButtonEnabled && data.setButtonEnabled(true);
       console.error(error);
     }
   };
@@ -63,14 +69,16 @@ const Card: React.FC<CardProps> = ({ item,
     return favoriteItemsIds.includes(itemId);
   };
 
-  const handleSaveChanges = async () => {
+  const handleSaveChanges = async (data: FunctionData) => {
     try {
+      data.setButtonEnabled && data.setButtonEnabled(false);
       await updateItem(editItem.id, editItem);
       setTitleHasValidation(false);
       setYearHasValidation(false);
       setGenreHasValidation(false);
       setDurationHasValidation(false);
       setImdbHasValidation(false);
+      data.setButtonEnabled && data.setButtonEnabled(true);
     } catch (validationErrors: any) {
       if (validationErrors) {
         if (validationErrors.title) {
@@ -89,6 +97,7 @@ const Card: React.FC<CardProps> = ({ item,
           setImdbHasValidation(true);
         }
       }
+      data.setButtonEnabled && data.setButtonEnabled(true);
     }
   }
 
@@ -110,7 +119,7 @@ const Card: React.FC<CardProps> = ({ item,
           {!editPage &&
             <h2 className="text-lg font-bold mb-2">{item.title}</h2>
           }
-          <div className='flex gap-3'>
+          <div className={`flex gap-3 ${editPage ? 'flex-col w-full items-center sm:flex-row sm:w-auto sm:items-stretch' : ''}`}>
             <div className='flex items-center h-auto w-1/3'>
               <img className="w-full max-w-sm rounded" src={posterUrl} alt={item.title} />
             </div>

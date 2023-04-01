@@ -25,6 +25,7 @@ const CardContainer: FC<CardContainerProps> = ({ items, auth, showFavorites, upd
 
   const handleRemoveFromFavoriteItems = async (data: FunctionData) => {
     try {
+      data.setButtonEnabled && data.setButtonEnabled(false);
       await deleteFavoriteItem(auth.user.id, data.id);
       if (showFavorites) {
         const updatedItems = items.filter(item => item.id !== data.id);
@@ -33,7 +34,9 @@ const CardContainer: FC<CardContainerProps> = ({ items, auth, showFavorites, upd
         const updatedFavoriteItems = favoriteItemsIds.filter(id => id !== data.id);
         setFavoriteItemsIds(updatedFavoriteItems);
       }
+      data.setButtonEnabled && data.setButtonEnabled(true);
     } catch (error) {
+      data.setButtonEnabled && data.setButtonEnabled(true);
       console.error(error);
     }
   }
