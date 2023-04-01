@@ -143,7 +143,9 @@ export const updateItem = async (id, editItem) => {
 };
 
 export const getItemImage = async (title) => {
-    const url = `${BASE_URL}?apikey=${API_KEY}&t=${title.replace(" ", "+")}`;
+    const url = `${BASE_URL}?apikey=${API_KEY}&t=${
+        title.replace(" ", "+") + "*"
+    }`;
 
     try {
         const response = await axios.get(url, {
