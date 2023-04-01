@@ -124,7 +124,7 @@ const Card: React.FC<CardProps> = ({ item,
               </div> :
               <div className='flex flex-col justify-between text-black w-full  leading-4'>
                 <div className='flex flex-col'>
-                  <label className='text-white' htmlFor="Title">Title</label>
+                  <label className='text-gray-500 dark:text-gray-400' htmlFor="Title">Title</label>
                   <input style={{ backgroundColor: titleHasValidation ? 'red' : 'white' }}
                     className='text-sm'
                     type="text"
@@ -132,7 +132,7 @@ const Card: React.FC<CardProps> = ({ item,
                     placeholder='Title'
                     onChange={(event) => setEditItem({ ...editItem, title: event.target.value })} />
 
-                  <label className='text-white' htmlFor="Year">Year</label>
+                  <label className='text-gray-500 dark:text-gray-400' htmlFor="Year">Year</label>
                   <input style={{ backgroundColor: yearHasValidation ? 'red' : 'white' }}
                     className='text-sm'
                     type="number"
@@ -140,7 +140,7 @@ const Card: React.FC<CardProps> = ({ item,
                     placeholder='Year'
                     onChange={(event) => setEditItem({ ...editItem, year: +event.target.value })} />
 
-                  <label className='text-white' htmlFor="genre">Genre</label>
+                  <label className='text-gray-500 dark:text-gray-400' htmlFor="genre">Genre</label>
                   <input style={{ backgroundColor: genreHasValidation ? 'red' : 'white' }}
                     className='text-sm'
                     type="text"
@@ -148,7 +148,7 @@ const Card: React.FC<CardProps> = ({ item,
                     placeholder='Genre'
                     onChange={(event) => setEditItem({ ...editItem, genre: event.target.value })} />
 
-                  <label className='text-white' htmlFor="Duration">Duration</label>
+                  <label className='text-gray-500 dark:text-gray-400' htmlFor="Duration">Duration</label>
                   <input style={{ backgroundColor: durationHasValidation ? 'red' : 'white' }}
                     className='text-sm'
                     type="number"
@@ -156,7 +156,7 @@ const Card: React.FC<CardProps> = ({ item,
                     placeholder='Duration'
                     onChange={(event) => setEditItem({ ...editItem, duration_in_minutes: +event.target.value })} />
 
-                  <label className='text-white' htmlFor="IMDB">IMDB rating</label>
+                  <label className='text-gray-500 dark:text-gray-400' htmlFor="IMDB">IMDB rating</label>
                   <input style={{ backgroundColor: imdbHasValidation ? 'red' : 'white' }}
                     className='text-sm' type="number" value={editItem.imdb}
                     placeholder='IMDB rating'
